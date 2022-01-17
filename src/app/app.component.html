@@ -15,14 +15,33 @@
         <textarea
           matInput
           placeholder="Ex. Imagine not being part of Dedalus? Sucks right?..."
+          #box
         ></textarea>
       </mat-form-field>
     </form>
     <div layout="row" layout-margin flex>
-      <button mat-raised-button color="primary" flex="20">
+      <button
+        mat-raised-button
+        color="primary"
+        flex="20"
+        #box
+        (click)="getValuesToAnalyze('consonants', box.value)"
+        ng-model="hideOutput"
+      >
         Analyze Online
       </button>
-      <button mat-raised-button color="primary">Analyze offline</button>
+
+      <div ng-hide="hideOutput">
+        <p class="mat-body-2" ng-hide="hideOutput">Vowel count:</p>
+        <p class="mat-body-2" *ngFor="let vowel of vowels">
+          {{ vowel }}: {{ vowelsCountMap[vowel] }}
+        </p>
+        <p class="mat-body-2">Consonants count:</p>
+        <p class="mat-body-2" *ngFor="let consonant of consonants">
+          {{ consonant }}: {{ consonantsCountMap[consonant] }}
+        </p>
+        <!-- <button mat-raised-button color="primary">Analyze offline</button> -->
+      </div>
     </div>
   </mat-card>
 </div>
