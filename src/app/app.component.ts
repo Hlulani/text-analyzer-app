@@ -12,6 +12,8 @@ export class AppComponent {
   consonants: any = [];
   consonantsCountMap: any = {};
   displayVal = '';
+  visibilityVowels = false;
+  visibility = false;
   getValuesToAnalyze1(value: string) {
     console.warn(value);
     this.displayVal = value;
@@ -23,8 +25,10 @@ export class AppComponent {
     this.vowelsCountMap = {};
     this.consonants = [];
     this.consonantsCountMap = {};
+
     const vowels = ['a', 'e', 'i', 'o', 'u'];
     if (type == 'vowels') {
+      this.visibilityVowels = true;
       for (let i = 0; i < chars.length; i++) {
         const char = chars[i].toLowerCase();
 
@@ -37,6 +41,7 @@ export class AppComponent {
       this.vowels = Object.keys(this.vowelsCountMap);
       console.log(this.vowels);
     } else if (type == 'consonants') {
+      this.visibility = true;
       for (let i = 0; i < chars.length; i++) {
         const char = chars[i].toLowerCase();
 
