@@ -1,3 +1,28 @@
-
 <div class="bg"></div>
-<h1>Dedalus Text Analyzer</h1>
+<div class="mat-typography" text-align="center">
+  <div class="mat-display-2" align="center">Dedalus Text Analyzer</div>
+</div>
+
+<div fxLayoutAlign="center center" fxfill>
+  <mat-card fxFlex="37">
+    <form class="analyzer-form" fxLayoutAlign="stretch">
+      <mat-form-field
+        class="analyzer-full-width"
+        appearance="fill"
+        align="center"
+      >
+        <mat-label>Add Text To Analyzer</mat-label>
+        <textarea
+          matInput
+          placeholder="Ex. Imagine not being part of Dedalus? Sucks right?..."
+        ></textarea>
+      </mat-form-field>
+    </form>
+    <div layout="row" layout-margin flex>
+      <button mat-raised-button color="primary" flex="20">
+        Analyze Online
+      </button>
+      <button mat-raised-button color="primary">Analyze offline</button>
+    </div>
+  </mat-card>
+</div>
