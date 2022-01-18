@@ -5,7 +5,14 @@
 
 <div fxLayoutAlign="center center" fxfill>
   <mat-card fxFlex="37">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" layout="row">
+      <mat-button-toggle value="underline" >Vowels</mat-button-toggle>
+      <mat-button-toggle value="underline" >Consonants</mat-button-toggle>
+    </mat-button-toggle-group>
+    <div class="mat-display-2"> </div>
+    
     <form class="analyzer-form" fxLayoutAlign="stretch">
+     
       <mat-form-field
         class="analyzer-full-width"
         appearance="fill"
