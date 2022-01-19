@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnalyzeService } from './services/analyze.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,28 @@ export class AppComponent {
   visibilityVowels = false;
   visibility = false;
   activeAnalyzer = '';
+  selectedValue = '';
+
+  constructor(private analyzeService: AnalyzeService) {}
+
+  getTextAreaVal(e: any) {
+    this.selectedValue = e.target.value;
+  }
+
+  analyzeTextOnline() {
+    // console.log(this.activeAnalyzer, this.selectedValue)
+    this.analyzeService
+      .analyzeText(this.activeAnalyzer, this.selectedValue)
+      .subscribe(
+        (data: any) => {
+          console.log(data.frequency_count);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
   getValuesToAnalyze1(value: string) {
     console.warn(value);
     this.displayVal = value;
@@ -23,6 +46,7 @@ export class AppComponent {
   changeAnalyzer(type: string) {
     this.activeAnalyzer = type;
   }
+
   getValuesToAnalyze(type: string, chars: string) {
     console.log('called');
     this.vowels = [];

@@ -34,6 +34,7 @@
           matInput
           placeholder="Ex. Imagine not being part of Dedalus? Sucks right?..."
           #box
+          (change)="getTextAreaVal($event)"
         ></textarea>
       </mat-form-field>
     </form>
@@ -48,11 +49,15 @@
           (click)="getValuesToAnalyze(activeAnalyzer, box.value)"
           style="margin: 5px"
         >
-          Analyze Online
+          Analyze offline
         </button>
 
-        <button mat-raised-button color="primary" style="margin: 5px">
-          Analyze offline
+        <button 
+        mat-raised-button 
+        color="primary" 
+        style="margin: 5px"
+        (click)="analyzeTextOnline()">
+          Analyze online
         </button>
       </div>
 
