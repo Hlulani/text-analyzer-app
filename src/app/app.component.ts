@@ -12,9 +12,7 @@ export class AppComponent {
   vowelsCountMap: any = {};
   consonants: any = [];
   consonantsCountMap: any = {};
-  displayVal = '';
-  visibilityVowels = false;
-  visibility = false;
+
   activeAnalyzer = '';
   selectedValue = '';
 
@@ -25,7 +23,6 @@ export class AppComponent {
   }
 
   analyzeTextOnline() {
-    // console.log(this.activeAnalyzer, this.selectedValue)
     this.analyzeService
       .analyzeText(this.activeAnalyzer, this.selectedValue)
       .subscribe(
@@ -38,17 +35,11 @@ export class AppComponent {
       );
   }
 
-  getValuesToAnalyze1(value: string) {
-    console.warn(value);
-    this.displayVal = value;
-  }
-
   changeAnalyzer(type: string) {
     this.activeAnalyzer = type;
   }
 
-  getValuesToAnalyze(type: string, chars: string) {
-    console.log('called');
+  analyzeTextOffline(type: string, chars: string) {
     this.vowels = [];
     this.vowelsCountMap = {};
     this.consonants = [];

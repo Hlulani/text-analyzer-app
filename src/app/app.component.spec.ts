@@ -1,7 +1,10 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+let component: AppComponent;
+let fixture: ComponentFixture<AppComponent>;
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -29,4 +32,18 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain('text-analyzer-app app is running!');
   });*/
+  it(`should analyze text online`, () => {
+    
+    const fixture = TestBed.createComponent(AppComponent);
+    
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.innerHTML).toContain("vowels");
+  });
+
+  it(`should analyze text offline`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    
+    
+  });
 });

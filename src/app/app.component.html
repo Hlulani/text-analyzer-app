@@ -46,17 +46,18 @@
           color="primary"
           flex="20"
           #box
-          (click)="getValuesToAnalyze(activeAnalyzer, box.value)"
+          (click)="analyzeTextOffline(activeAnalyzer, box.value)"
           style="margin: 5px"
         >
           Analyze offline
         </button>
 
-        <button 
-        mat-raised-button 
-        color="primary" 
-        style="margin: 5px"
-        (click)="analyzeTextOnline()">
+        <button
+          mat-raised-button
+          color="primary"
+          style="margin: 5px"
+          (click)="analyzeTextOnline()"
+        >
           Analyze online
         </button>
       </div>
