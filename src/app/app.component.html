@@ -1,18 +1,29 @@
 <div class="bg"></div>
 <div class="mat-typography" text-align="center">
-  <div class="mat-display-2" align="center">Dedalus Text Analyzer</div>
+  <div class="mat-display-2" align="center" style="margin-top: 10px">
+    Dedalus Text Analyzer
+  </div>
 </div>
 
 <div fxLayoutAlign="center center" fxfill>
   <mat-card fxFlex="37">
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" layout="row">
-      <mat-button-toggle value="underline" >Vowels</mat-button-toggle>
-      <mat-button-toggle value="underline" >Consonants</mat-button-toggle>
+    <mat-button-toggle-group
+      name="fontStyle"
+      aria-label="Font Style"
+      style="margin-bottom: 0em"
+    >
+      <mat-button-toggle value="underline" (click)="changeAnalyzer('vowels')"
+        >Vowels</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="underline"
+        (click)="changeAnalyzer('consonants')"
+        >Consonants</mat-button-toggle
+      >
     </mat-button-toggle-group>
-    <div class="mat-display-2"> </div>
-    
+
+    <div style="margin-bottom: 20px"></div>
     <form class="analyzer-form" fxLayoutAlign="stretch">
-     
       <mat-form-field
         class="analyzer-full-width"
         appearance="fill"
@@ -26,29 +37,40 @@
         ></textarea>
       </mat-form-field>
     </form>
-    <div layout="row" layout-margin flex>
-      <button
-        mat-raised-button
-        color="primary"
-        flex="20"
-        #box
-        (click)="getValuesToAnalyze('consonants', box.value)"
-        ng-model="hideOutput"
-      >
-        Analyze Online
-      </button>
 
-      <div ng-hide="hideOutput">
-        <p class="mat-body-2" *ngIf="visibilityVowels">Vowel count:</p>
-        <p class="mat-body-2" *ngFor="let vowel of vowels">
-          Letter '{{ vowel }}' appears {{ vowelsCountMap[vowel] }} times!!
-        </p>
-        <p class="mat-body-2" *ngIf="visibility">Consonants count:</p>
-        <p class="mat-body-2" *ngFor="let consonant of consonants">
-          Letter '{{ consonant }}' appears {{ consonantsCountMap[consonant] }}
-          times!!
-        </p>
-        <!-- <button mat-raised-button color="primary">Analyze offline</button> -->
+    <div layout="row" layout-margin flex>
+      <div style="display: inline-block">
+        <button
+          mat-raised-button
+          color="primary"
+          flex="20"
+          #box
+          (click)="getValuesToAnalyze(activeAnalyzer, box.value)"
+          style="margin: 5px"
+        >
+          Analyze Online
+        </button>
+
+        <button mat-raised-button color="primary" style="margin: 5px">
+          Analyze offline
+        </button>
+      </div>
+
+      <div>
+        <div *ngIf="activeAnalyzer === 'vowels'">
+          <p class="mat-body-2">Vowel count:</p>
+          <p class="mat-body-2" *ngFor="let vowel of vowels">
+            Letter '{{ vowel }}' appears {{ vowelsCountMap[vowel] }} times!!
+          </p>
+        </div>
+
+        <div *ngIf="activeAnalyzer === 'consonants'">
+          <p class="mat-body-2">Consonants count:</p>
+          <p class="mat-body-2" *ngFor="let consonant of consonants">
+            Letter '{{ consonant }}' appears {{ consonantsCountMap[consonant] }}
+            times!!
+          </p>
+        </div>
       </div>
     </div>
   </mat-card>
