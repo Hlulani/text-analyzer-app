@@ -18,16 +18,17 @@ export class AppComponent {
 
   constructor(private analyzeService: AnalyzeService) {}
 
-  getTextAreaVal(e: any) {
-    this.selectedValue = e.target.value;
-  }
-
   analyzeTextOnline() {
     this.analyzeService
       .analyzeText(this.activeAnalyzer, this.selectedValue)
       .subscribe(
         (data: any) => {
           console.log(data.frequency_count);
+          this.vowelsCountMap = data.frequency_count;
+          this.vowels = Object.keys(this.vowelsCountMap);
+          
+          this.consonantsCountMap = data.frequency_count;
+          this.consonants = Object.keys(this.consonantsCountMap);
         },
         (error) => {
           console.log(error);
@@ -39,35 +40,30 @@ export class AppComponent {
     this.activeAnalyzer = type;
   }
 
-  analyzeTextOffline(type: string, chars: string) {
+  analyzeTextOffline() {
     this.vowels = [];
     this.vowelsCountMap = {};
     this.consonants = [];
     this.consonantsCountMap = {};
-
     const vowels = ['a', 'e', 'i', 'o', 'u'];
-    if (type == 'vowels') {
-      for (let i = 0; i < chars.length; i++) {
-        const char = chars[i].toLowerCase();
-
-        if (vowels.indexOf(char) != -1) {
-          this.vowelsCountMap[char] = this.vowelsCountMap[char]
-            ? this.vowelsCountMap[char] + 1
-            : 1;
+    const isTypeVowels = this.activeAnalyzer === 'vowels';
+    const characterTypeMap = this.selectedValue.toLowerCase()
+      .split('')
+      .filter(char => vowels.includes(char) === isTypeVowels)
+      .reduce((charCountMap: any, character) => {
+        if (charCountMap[character]) {
+          charCountMap[character] = charCountMap[character] + 1;
+        } else {
+          charCountMap[character] = 1;
         }
-      }
+        return charCountMap;
+      }, {});
+
+    if (isTypeVowels) {
+      this.vowelsCountMap = { ...characterTypeMap };
       this.vowels = Object.keys(this.vowelsCountMap);
-      console.log(this.vowels);
-    } else if (type == 'consonants') {
-      for (let i = 0; i < chars.length; i++) {
-        const char = chars[i].toLowerCase();
-
-        if (vowels.indexOf(char) == -1 && char != ' ') {
-          this.consonantsCountMap[char] = this.consonantsCountMap[char]
-            ? this.consonantsCountMap[char] + 1
-            : 1;
-        }
-      }
+    } else {
+      this.consonantsCountMap = { ...characterTypeMap };
       this.consonants = Object.keys(this.consonantsCountMap);
     }
   }

@@ -33,8 +33,8 @@
         <textarea
           matInput
           placeholder="Ex. Imagine not being part of Dedalus? Sucks right?..."
-          #box
-          (change)="getTextAreaVal($event)"
+          [(ngModel)]="selectedValue"
+          name="textToAnalyze"
         ></textarea>
       </mat-form-field>
     </form>
@@ -45,8 +45,7 @@
           mat-raised-button
           color="primary"
           flex="20"
-          #box
-          (click)="analyzeTextOffline(activeAnalyzer, box.value)"
+          (click)="analyzeTextOffline()"
           style="margin: 5px"
         >
           Analyze offline
@@ -56,6 +55,7 @@
           mat-raised-button
           color="primary"
           style="margin: 5px"
+          #box
           (click)="analyzeTextOnline()"
         >
           Analyze online
